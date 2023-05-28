@@ -1,0 +1,6 @@
+.env
+/__pycache__
+/.vscode
+*.db
+models/__pycache__/__init__.cpython-310.pyc
+models/__pycache__/tasks.cpython-310.pyc
