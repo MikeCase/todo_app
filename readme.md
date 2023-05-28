@@ -6,8 +6,8 @@ It shows an interface, and you can click the button to add an item to the taskli
 
 ### Future
 
-* Adding persistence. Probably sqlite DB to keep it self contained. 
-* Clean up the interface
-* Change task list to a task list of checkboxes, if checked complete. update DB to show completeness.
+* ~~Adding persistence. Probably sqlite DB to keep it self contained.~~
+* ~~Clean up the interface~~
+* ~~Change task list to a task list of checkboxes, if checked complete. update DB to show completeness.~~
 
-Using customTKinter for the UI. It's clean and modern looking I like it. Credit to the maker **update **
+Using customTKinter for the UI. It's clean and modern looking I like it. Credit to the maker Tom Schimansky [Link](https://github.com/TomSchimansky/CustomTkinter)
