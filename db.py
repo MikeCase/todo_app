@@ -28,6 +28,8 @@ class AppDB:
         else:
             task.complete = 1
             self.session.commit()
+        
+        return task
 
     def get_all_tasks(self):
         tasks = self.session.query(Task).all()

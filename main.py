@@ -30,8 +30,12 @@ class AppFrame(ctk.CTkFrame):
         self.button.grid(row=3, column=0, pady=10)
 
         self.tasklist = TaskListCB(self, tasks=self.tasks)
+        # Fix for customtkinter scrollable frame mouse wheel scrolling. Doesn't work in linux without these two lines of code
+        # Havent tested in windows to make sure it still works in windows.
+        # https://github.com/TomSchimansky/CustomTkinter/issues/1356
         self.tasklist.bind_all("<Button-4>", lambda e: self.tasklist._parent_canvas.yview("scroll", -1, "units"))
         self.tasklist.bind_all("<Button-5>", lambda e: self.tasklist._parent_canvas.yview("scroll", 1, "units"))
+
         self.tasklist.grid(row=4, column=0, sticky="nsew", padx=20, pady=10)
 
     def add_task_btn_pressed(self):

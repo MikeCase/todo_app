@@ -8,10 +8,10 @@ from db import AppDB, Task
 class TaskListCB(ctk.CTkScrollableFrame):
     def __init__(self, master, tasks):
         super().__init__(master)
-        self.tasks = tasks
         self.checkboxes = []
         self.db = AppDB()
-        self.bind('')
+        self.tasks = self.db.get_all_tasks()
+        # self.bind('')
 
         self.show_tasks()
 
@@ -57,12 +57,13 @@ class TaskListCB(ctk.CTkScrollableFrame):
                 self, text=task.desc, checkbox_width=15, checkbox_height=15, corner_radius=1, border_width=1)
 
             if task.complete:
-                checkbox.configure(state="disabled")
+                checkbox.configure(state=tkinter.DISABLED)
                 checkbox.bind('<Button-3>', self.__CurSelect)
                 checkbox.select()
 
             if checkbox._state != tkinter.DISABLED:
                 checkbox.bind('<Button-1>', self.__CurSelect)
+                checkbox.deselect()
 
             checkbox.grid(row=idx, column=0, padx=10, pady=(10, 0), sticky="w")
             self.checkboxes.append(checkbox)
@@ -70,11 +71,12 @@ class TaskListCB(ctk.CTkScrollableFrame):
     def complete_task(self, task: Task, chkbox_widget: ctk.CTkCheckBox) -> None:
         ''' Function to mark a task completed. '''
 
-        # Configure the checkbox widget to be disabled after completing.
-        chkbox_widget.configure(state=tkinter.DISABLED)
+        updated_task = self.db.update_task(task.id)
         # now make sure we can't click on it again.
-        if task.complete:
-            chkbox_widget.bind('<Button-3>', self.__CurSelect)
+        # if updated_task.complete:
+        #     # Configure the checkbox widget to be disabled after completing.
+        #     chkbox_widget.configure(state=tkinter.DISABLED)
+        #     chkbox_widget.unbind('<Button-1>')
+        #     chkbox_widget.bind('<Button-3>', self.__CurSelect)
             
-        self.db.update_task(task.id)
         self.show_tasks()
