@@ -15,27 +15,23 @@ class AppDB:
         self.session.add(task)
         self.session.commit()
 
-    def remove_task(self, task_id):
-        task = self.session.query(Task).where(Task.id == task_id).first()
+    def remove_task(self, task):
         self.session.delete(task)
         self.session.commit()
 
-    def update_task(self, task_id):
-        task = self.session.query(Task).where(Task.id == task_id).first()
+    def update_task(self, task):
         if task.complete == 1:
             task.complete = 0
             self.session.commit()
         else:
             task.complete = 1
             self.session.commit()
-        
-        return task
 
     def get_all_tasks(self):
         tasks = self.session.query(Task).all()
         # pprint(tasks)
         return tasks
     
-    def get_task_by_title(self, task_title):
+    def get_task_by_title(self, task_title) -> Task:
         task = self.session.query(Task).where(Task.desc == task_title).first()
         return task
