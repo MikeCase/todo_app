@@ -1,4 +1,4 @@
-from typing import Any, List, Optional
+from typing import Any, List, Optional, Dict
 from sqlalchemy import ForeignKey, String, DateTime, Integer, Column, Boolean
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.sql.functions import now
@@ -15,16 +15,16 @@ class Task(Base):
     created_at = Column(DateTime, default=now)
     complete = Column(Boolean, default=False)
 
-    def __init__(self, id, desc, created_at, complete):
+    def __init__(self, id, desc, created_at, complete) -> None:
         self.id = id
         self.desc = desc
         self.created_at = created_at
         self.complete = complete
 
-    def __repr__(self):
+    def __repr__(self) -> String:
         return f"({self.id}) {self.desc} - {self.created_at} - {self.complete}"
 
-    def get_task(self):
+    def get_task(self) -> Dict:
         return {
             'id': self.id,
             'desc': self.desc,
